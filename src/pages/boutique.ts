@@ -2,7 +2,7 @@ import { boot } from '../core/boot'
 import { $, $$, fold, html, param, reducedMotion } from '../core/dom'
 import { icon } from '../core/icons'
 import { productArt } from '../core/art'
-import { pageHero, productCard } from '../core/components'
+import { pageHero, photoBand, productCard } from '../core/components'
 import { Flip, gsap, motionOn } from '../core/motion'
 import { CATEGORIES, MOMENTS, PRODUCTS, TAG_LABEL, type CategoryId, type Moment, type ProductTag } from '../data'
 
@@ -43,6 +43,7 @@ function main(): string {
       title: 'Pains, viennoiseries, flans et snacking.',
       lead: 'Le catalogue de la maison, à feuilleter. L’offre change régulièrement: pour savoir ce qui est en vitrine ce matin, appelez la boutique.',
     })}
+    ${photoBand(['pains-graines-ble', 'croissants-table', 'tarte-fruits-rouges'], 'photo-slim--shop')}
     <section class="section section--tight shop" aria-label="Catalogue">
       <div class="wrap">
         <div class="moments" role="group" aria-label="Choisir un moment de la journée">

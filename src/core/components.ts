@@ -1,7 +1,7 @@
 // Petits composants HTML réutilisés par plusieurs pages (des chaînes, pas de framework).
 import { CUSTOMER_WORDS, HOURS, TAG_LABEL, formatRange, parisNow, type NewsPost, type Product, type Testimonial } from '../data'
 import { crystalSvg, productArt } from './art'
-import { flanById, PHOTO_NOTE, photoFor, type Photo, type PhotoTheme } from '../data'
+import { flanById, PHOTO_NOTE, photoBySlug, photoFor, type Photo, type PhotoTheme } from '../data'
 import { esc, eur, href, html } from './dom'
 import { icon } from './icons'
 
@@ -43,7 +43,7 @@ export const productCard = (p: Product): string => html`
 
 export const newsCard = (n: NewsPost, big = false): string => html`
   <a class="news-card${big ? ' news-card--big' : ''}" href="${href(`journal/article.html?slug=${n.slug}`)}" data-category="${n.category}">
-    <div class="news-cover news-cover--photo">${photoImg(photoFor(seedOf(n.slug)), 'ph-img', true)}</div>
+    <div class="news-cover news-cover--photo">${photoImg(newsPhoto(n), 'ph-img', true)}</div>
     <div class="news-meta"><span class="badge">${n.category}</span><time class="mono" datetime="${n.date}">${n.dateLabel}</time></div>
     <h3>${n.title}</h3>
     <p class="muted">${n.excerpt}</p>
@@ -59,6 +59,29 @@ export const photoFigure = (ph: Photo, cls = '', reveal = 'up'): string => html`
     <div class="ph-frame">${photoImg(ph)}</div>
     <figcaption class="ph-cap"><span>${PHOTO_NOTE}</span> · <a href="${ph.url}" target="_blank" rel="noopener noreferrer">${esc(ph.credit)} / Unsplash</a></figcaption>
   </figure>`
+
+/** Bande photo fine (pages intérieures: FAQ, infos, légal…). Une à trois photos, recadrées en bandeau. */
+export const photoBand = (slugs: string[], cls = ''): string => {
+  const list = slugs.map(photoBySlug).filter((p): p is Photo => !!p)
+  return html`
+    <section class="photo-slim ${cls}" aria-label="Photos d’illustration">
+      <div class="wrap">
+        <ul class="photo-slim-grid photo-slim-grid--${String(list.length)}">
+          ${list.map((ph, i) => html`<li class="photo-slim-item" data-reveal="${i === 0 ? 'clip' : 'up'}">${photoImg(ph, 'ph-img', i === 0)}</li>`)}
+        </ul>
+        <p class="ph-cap">${PHOTO_NOTE} · ${list.map((ph) => html`<a href="${ph.url}" target="_blank" rel="noopener noreferrer">${esc(ph.credit)}</a>`).join(', ')} / Unsplash</p>
+      </div>
+    </section>`
+}
+
+/** Photo associée à un produit (même choix que sa carte), ou undefined pour les flans et le snacking (art SVG). */
+export const productPhoto = (p: Product): Photo | undefined => {
+  const t = productTheme(p)
+  return t ? photoFor(seedOf(p.id), t) : undefined
+}
+
+/** Photo de couverture d'un article (même choix que sa carte). */
+export const newsPhoto = (n: NewsPost): Photo => photoFor(seedOf(n.slug))
 
 const PRODUCT_THEME: Partial<Record<string, PhotoTheme>> = {
   pains: 'pain',

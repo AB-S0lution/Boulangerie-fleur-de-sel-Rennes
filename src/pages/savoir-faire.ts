@@ -1,8 +1,8 @@
 import { boot } from '../core/boot'
 import { $, $$, href, html } from '../core/dom'
-import { pageHero, sectionHead, arrowLink } from '../core/components'
+import { pageHero, photoBand, photoImg, sectionHead, arrowLink } from '../core/components'
 import { gsap, motionOn, ScrollTrigger } from '../core/motion'
-import { BUSINESS, GLOSSARY, PROCESS, SUPPLIERS } from '../data'
+import { BUSINESS, GLOSSARY, PROCESS, SUPPLIERS, photoBySlug } from '../data'
 
 function process(): string {
   return html`
@@ -45,16 +45,19 @@ function pillars(): string {
         ${sectionHead('Trois repères', 'Le beurre, le temps, le sel.')}
         <div class="craft-grid">
           <article class="craft-card" data-reveal>
+            <div class="craft-photo">${photoImg(photoBySlug('croissants-plaque')!, 'ph-img', true)}</div>
             <p class="mono craft-n">Le tourage</p>
             <h3>Un chef tourier, du beurre AOP.</h3>
             <p class="muted">Baptiste Cortais dirige la viennoiserie. Le beurre est un AOP Charentes-Poitou, fourni par Lescure. Il n’y a ni miel, ni vanille, ni levain dans le croissant. Et jamais de margarine.</p>
           </article>
           <article class="craft-card" data-reveal>
+            <div class="craft-photo">${photoImg(photoBySlug('mie-alveolee')!, 'ph-img', true)}</div>
             <p class="mono craft-n">Le levain</p>
             <h3>Quinze heures de fermentation.</h3>
             <p class="muted">Nos pains sont bio et au levain naturel. Mathis Ruelleux dirige le pain: des pains généreux de 600 à 700 g.</p>
           </article>
           <article class="craft-card" data-reveal>
+            <div class="craft-photo">${photoImg(photoBySlug('pains-graines-ble')!, 'ph-img', true)}</div>
             <p class="mono craft-n">Le bara</p>
             <h3>Le pain, en breton.</h3>
             <p class="muted">Farine T80, blé noir, sel de Guérande et graines de sarrasin torréfiées. C’est le pain de la maison, celui qui dit où nous sommes.</p>
@@ -153,6 +156,6 @@ boot({
   nav: 'savoir-faire',
   main: () => html`
     ${pageHero({ eyebrow: 'Savoir-faire', title: 'Du pétrin à la fleur de sel.', lead: 'Le beurre se plie, le levain prend son temps, le sel finit le travail. Voici comment nous travaillons, sans en révéler la recette.' })}
-    ${process()}${pillars()}${ingredients()}${certification()}${glossary()}`,
+    ${process()}${pillars()}${photoBand(['petrissage-rouleau', 'miche-farine', 'planche-viennoiseries'])}${ingredients()}${certification()}${glossary()}`,
   init: initProcess,
 })

@@ -1,7 +1,7 @@
 import { boot } from '../core/boot'
 import { $, href, html } from '../core/dom'
 import { galleryArt } from '../core/art'
-import { arrowLink, pageHero, photoFigure, sectionHead } from '../core/components'
+import { arrowLink, pageHero, photoFigure, photoImg, sectionHead } from '../core/components'
 import { gsap, motionOn } from '../core/motion'
 import { AWARDS, BUSINESS, FLANS, GALLERY, TEAM, TEAM_SIZE_NOTE, TIMELINE, photoBySlug, stat } from '../data'
 
@@ -72,13 +72,16 @@ function trust(): string {
     </section>`
 }
 
+// Une photo de geste ou de produit par rôle (jamais de visage): images d'ambiance, pas l'équipe réelle.
+const TEAM_PHOTOS = ['croissants-plaque-inox', 'miche-farine', 'pain-jute', 'deux-croissants', 'macarons', 'pain-couteau', 'pains-etagere', 'petrissage-rouleau']
+
 function team(): string {
   return html`
     <section class="section team">
       <div class="wrap">
         ${sectionHead('L’équipe', 'Une maison de métiers.', `${TEAM_SIZE_NOTE}. Boulangers, tourières, vendeuses, traiteur: chacun a son geste.`)}
         <ul class="team-grid">
-          ${TEAM.map((m) => html`<li class="team-card" data-reveal><h3>${m.named && m.name ? m.name : m.role}</h3><p class="mono">${m.named ? m.role : 'Rôle'}</p><p class="muted">${m.description}</p></li>`)}
+          ${TEAM.map((m, i) => html`<li class="team-card" data-reveal><div class="team-photo">${photoImg(photoBySlug(TEAM_PHOTOS[i % TEAM_PHOTOS.length])!, 'ph-img', i === 0)}</div><h3>${m.named && m.name ? m.name : m.role}</h3><p class="mono">${m.named ? m.role : 'Rôle'}</p><p class="muted">${m.description}</p></li>`)}
         </ul>
       </div>
     </section>`

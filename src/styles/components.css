@@ -1350,3 +1350,20 @@ button {
     background: var(--bg);
   }
 }
+
+/* Boucles décoratives en pause hors écran; flous coûteux retirés sur écrans tactiles */
+.marquee.is-offscreen .marquee-track,
+.nf-crystals.is-offscreen .nf-bit {
+  animation-play-state: paused;
+}
+@media (hover: none), (pointer: coarse) {
+  .dock {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--bg);
+  }
+  .site-header::before {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

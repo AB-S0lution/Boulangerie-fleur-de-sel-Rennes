@@ -334,7 +334,7 @@ function initHero() {
 
   const mm = gsap.matchMedia()
   mm.add(
-    { desk: '(min-width: 900px) and (hover: hover) and (pointer: fine)', other: '(max-width: 899px), (hover: none)' },
+    { desk: '(min-width: 900px) and (hover: hover) and (pointer: fine)', other: '(max-width: 899px), (hover: none), (pointer: coarse)' },
     (ctx) => {
       const desk = !!ctx.conditions?.desk
       clock.textContent = fmt(60)
@@ -378,7 +378,18 @@ function initTourage() {
   const pin = $('[data-tourage-pin]')
   if (!root || !pin || !motionOn()) return
   const mm = gsap.matchMedia()
-  mm.add('(min-width: 900px)', () => {
+  // Téléphones et tablettes tactiles: pas d'épinglage, chaque pile de feuillets se déplie à l'entrée dans l'écran.
+  mm.add('(max-width: 899px), (hover: none), (pointer: coarse)', () => {
+    $$('.step', root).forEach((s) => s.classList.add('is-active'))
+    $$('.step-art', root).forEach((art) => {
+      gsap.fromTo(
+        art,
+        { scaleY: 0.4, opacity: 0, transformOrigin: '50% 100%' },
+        { scaleY: 1, opacity: 1, duration: 0.9, ease: 'expo.out', scrollTrigger: { trigger: art, start: 'top 90%', once: true } },
+      )
+    })
+  })
+  mm.add('(min-width: 900px) and (hover: hover) and (pointer: fine)', () => {
     const stacks = $$('[data-stack]', root)
     const steps = $$('.step', root)
     const label = $('[data-layers]', root)!

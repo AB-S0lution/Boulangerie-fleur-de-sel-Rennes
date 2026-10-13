@@ -81,6 +81,42 @@ function initStatus(): void {
 }
 
 /** La barre d'action mobile apparaît après le premier écran. */
+/** Rangées défilantes: fondu sur le bord qui cache encore du contenu, et un indice « Glissez » tant qu'il en reste. */
+function initScrollers(): void {
+  $$('.scroller, .hpan-viewport').forEach((el) => {
+    const hint = document.createElement('p')
+    hint.className = 'swipe-hint'
+    hint.setAttribute('aria-hidden', 'true')
+    hint.innerHTML = 'Glissez pour voir la suite <i>→</i>'
+    if (el.classList.contains('hpan-viewport')) hint.style.paddingInline = 'var(--gutter)'
+    el.after(hint)
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const max = el.scrollWidth - el.clientWidth
+      const pinned = el.classList.contains('is-pinned')
+      const right = !pinned && max > 4 && el.scrollLeft < max - 4
+      el.classList.toggle('can-left', !pinned && el.scrollLeft > 4)
+      el.classList.toggle('can-right', right)
+      hint.classList.toggle('is-on', right && el.scrollLeft < 8)
+    }
+    const queue = () => {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+    el.addEventListener('scroll', queue, { passive: true })
+    new ResizeObserver(queue).observe(el)
+    update()
+  })
+}
+
+/** Boucles décoratives (bandeau défilant, cristaux de la 404) mises en pause hors écran. */
+function initOffscreenPause(): void {
+  const els = $$('.marquee, .nf-crystals')
+  if (!els.length || !('IntersectionObserver' in window)) return
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => e.target.classList.toggle('is-offscreen', !e.isIntersecting)))
+  els.forEach((el) => io.observe(el))
+}
+
 function initDock(): void {
   const dock = $('[data-dock]')
   if (!dock) return
@@ -100,6 +136,8 @@ export function boot(def: PageDef): void {
     initMenu()
     initStatus()
     initDock()
+    initScrollers()
+    initOffscreenPause()
     ScrollTrigger.config({ ignoreMobileResize: true })
     initSmoothScroll()
     initTransitions()
@@ -111,6 +149,7 @@ export function boot(def: PageDef): void {
     initCounters()
     initParallax()
     refreshOnReady()
+    root.classList.add('motion-ready')
     // Reprise d'ancre après rendu JS
     if (location.hash) {
       const t = document.getElementById(decodeURIComponent(location.hash.slice(1)))

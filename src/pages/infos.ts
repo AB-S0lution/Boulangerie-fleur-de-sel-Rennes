@@ -2,8 +2,8 @@ import { boot } from '../core/boot'
 import { href, html } from '../core/dom'
 import { icon } from '../core/icons'
 import { quartierSchema } from '../core/art'
-import { arrowLink, hoursTable, pageHero, statusPill } from '../core/components'
-import { BUSINESS, HOLIDAY_NOTE, POIS, SOCIALS, TRANSPORT } from '../data'
+import { arrowLink, hoursTable, pageHero, photoFigure, statusPill } from '../core/components'
+import { BUSINESS, HOLIDAY_NOTE, POIS, SOCIALS, TRANSPORT, photoBySlug } from '../data'
 
 function main(): string {
   const a = BUSINESS.address
@@ -31,6 +31,7 @@ function main(): string {
           </ul>
           <p class="fine muted">Pas d’adresse e-mail ni de formulaire sur ce site de démonstration.</p>
         </div>
+        <div class="infos-card infos-card--photo">${photoFigure(photoBySlug('pains-etagere')!, 'infos-photo', 'clip')}<p class="fine muted">Vitrine d’ambiance. Pas une photo de la boutique: elles arriveront avec l’accord de la maison.</p></div>
         <div class="infos-card infos-card--wide" data-reveal>
           <h2 class="h-small">Comment venir</h2>
           <div class="infos-map">

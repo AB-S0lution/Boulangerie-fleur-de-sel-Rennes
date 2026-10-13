@@ -2,7 +2,7 @@ import { boot } from '../core/boot'
 import { $, $$, href, html } from '../core/dom'
 import { icon } from '../core/icons'
 import { quartierSchema } from '../core/art'
-import { arrowLink, pageHero, sectionHead } from '../core/components'
+import { arrowLink, pageHero, photoBand, sectionHead } from '../core/components'
 import { gsap, motionOn, ScrollTrigger } from '../core/motion'
 import { BUSINESS, POIS, QUARTIER_FACTS, TRANSPORT } from '../data'
 
@@ -37,6 +37,7 @@ function main(): string {
         </ol>
       </div>
     </section>
+    ${photoBand(['pain-sac-papier', 'cafe-viennoiseries'])}
     <section class="section section--line facts">
       <div class="wrap">
         ${sectionHead('Saint-Martin en chiffres', 'Un quartier jeune et vivant.', 'Repères approximatifs, à titre indicatif.')}

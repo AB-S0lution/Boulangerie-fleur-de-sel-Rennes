@@ -2,7 +2,7 @@ import { boot } from '../core/boot'
 import { eur, href, html, param, setMeta } from '../core/dom'
 import { icon } from '../core/icons'
 import { productArt } from '../core/art'
-import { productCard } from '../core/components'
+import { photoImg, productCard, productPhoto } from '../core/components'
 import { ALLERGEN_LABEL, BUSINESS, MOMENTS, PRODUCTS, TAG_LABEL, categoryById, productById, type Product } from '../data'
 
 const id = param('id') ?? ''
@@ -46,7 +46,15 @@ function body(p: Product): string {
           <a class="link" href="${href('boutique/')}">Boutique</a><span aria-hidden="true">/</span><a class="link" href="${href(`boutique/?cat=${cat.id}`)}">${cat.label}</a>
         </nav>
         <div class="product-grid">
-          <div class="product-art vt-product-art">${productArt(p.art)}</div>
+          ${(() => {
+            const ph = productPhoto(p)
+            return ph
+              ? html`<div class="product-media">
+                  <figure class="product-photo"><div class="product-photo-frame">${photoImg(ph, 'ph-img', true)}</div><figcaption class="ph-cap"><a href="${ph.url}" target="_blank" rel="noopener noreferrer">${ph.credit} / Unsplash</a></figcaption></figure>
+                  <div class="product-art product-art--mini vt-product-art">${productArt(p.art)}</div>
+                </div>`
+              : html`<div class="product-art vt-product-art">${productArt(p.art)}</div>`
+          })()}
           <div class="product-info">
             <span class="badges">${p.tags.map((t) => html`<span class="badge${t === 'champion' || t === 'signature' ? ' badge--gold' : ''}">${TAG_LABEL[t]}</span>`)}</span>
             <h1 class="product-title">${p.name}</h1>

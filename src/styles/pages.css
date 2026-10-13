@@ -409,7 +409,7 @@ html:not(.js-motion) .hero-croissant {
     min-height: 640px;
   }
   .hero-art {
-    right: -10vw;
+    right: -8vw;
     top: calc(var(--header-h) + 3svh);
     width: 116vw;
   }
@@ -573,7 +573,7 @@ html:not(.js-motion) .hero-croissant {
   letter-spacing: -0.04em;
   margin-right: 8px;
 }
-@media (min-width: 900px) {
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
   .js-motion .tourage-pin {
     min-height: 100svh;
     display: flex;
@@ -2650,5 +2650,277 @@ html:not(.js-motion) .flan-stage-grid {
 @media (min-width: 900px) {
   .photo-masonry {
     columns: 4 220px;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Passe médias + téléphone/tablette (2026-10-14)
+   --------------------------------------------------------------------------------------------- */
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+.ph-cap {
+  font-size: 0.75rem;
+}
+
+/* Bande photo fine des pages intérieures */
+.photo-slim {
+  padding-block: clamp(8px, 2vw, 24px) clamp(24px, 4vw, 48px);
+}
+.photo-slim-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+.photo-slim-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  aspect-ratio: 16 / 7;
+  background: var(--night);
+}
+.photo-slim-grid--3 {
+  grid-template-columns: 1fr 1fr;
+}
+.photo-slim-grid--3 .photo-slim-item:first-child {
+  grid-column: 1 / -1;
+}
+.photo-slim-grid--3 .photo-slim-item:not(:first-child) {
+  aspect-ratio: 4 / 3;
+}
+.photo-slim-grid--2 {
+  grid-template-columns: 1fr 1fr;
+}
+.photo-slim-grid--2 .photo-slim-item {
+  aspect-ratio: 4 / 3;
+}
+.photo-slim--single .photo-slim-item {
+  aspect-ratio: 21 / 8;
+}
+@media (min-width: 720px) {
+  .photo-slim-grid--3 {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  .photo-slim-grid--3 .photo-slim-item:first-child {
+    grid-column: auto;
+  }
+  .photo-slim-grid--3 .photo-slim-item,
+  .photo-slim-grid--3 .photo-slim-item:not(:first-child) {
+    aspect-ratio: auto;
+    height: clamp(180px, 24vw, 300px);
+  }
+  .photo-slim-grid--2 .photo-slim-item {
+    aspect-ratio: 16 / 9;
+  }
+  .photo-slim--single .photo-slim-item {
+    aspect-ratio: 21 / 6;
+  }
+}
+.photo-slim .ph-cap {
+  margin-top: 10px;
+}
+
+/* Article: photo de couverture + illustration dans le corps */
+.article-cover--photo .ph-frame {
+  aspect-ratio: 16 / 10;
+}
+@media (min-width: 720px) {
+  .article-cover--photo .ph-frame {
+    aspect-ratio: 16 / 7;
+  }
+}
+.article-art {
+  margin: 12px 0 8px;
+  display: grid;
+  gap: 8px;
+}
+.article-art svg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 8;
+  background: var(--night);
+}
+
+/* Fiche produit: photo d'ambiance + étiquette dessinée */
+.product-media {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr);
+}
+.product-photo {
+  margin: 0;
+}
+.product-photo-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  aspect-ratio: 4 / 3;
+  background: var(--night);
+}
+.product-art--mini {
+  aspect-ratio: 16 / 9;
+}
+.product-art--mini .art {
+  width: auto;
+  height: 74%;
+}
+@media (min-width: 900px) {
+  .product-media {
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+  }
+  .product-photo-frame {
+    aspect-ratio: 4 / 3.4;
+  }
+  .product-media .product-art--mini {
+    position: static;
+    aspect-ratio: 16 / 7;
+  }
+}
+
+/* Savoir-faire, équipe, infos, 404 */
+.craft-photo,
+.team-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  aspect-ratio: 16 / 10;
+  margin: -6px -6px 4px;
+  background: var(--night);
+}
+.team-photo {
+  aspect-ratio: 3 / 2;
+  margin: -8px -8px 6px;
+}
+@media (min-width: 720px) {
+  .craft-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .craft-card {
+    padding: clamp(18px, 2.4vw, 28px);
+  }
+}
+.infos-card--photo {
+  padding: 0;
+  border: 0;
+  background: none;
+  gap: 10px;
+}
+.infos-card--photo .ph-frame {
+  aspect-ratio: 4 / 3;
+}
+@media (min-width: 720px) {
+  .infos-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .infos-card--wide,
+  .infos-card--photo {
+    grid-column: 1 / -1;
+  }
+  .infos-card--photo .ph-frame {
+    aspect-ratio: 21 / 8;
+  }
+}
+@media (min-width: 1100px) {
+  .infos-grid {
+    grid-template-columns: 1fr 1fr 0.9fr;
+  }
+  .infos-card--photo {
+    grid-column: auto;
+  }
+  .infos-card--photo .ph-frame {
+    aspect-ratio: 4 / 5;
+  }
+}
+.nf-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  width: min(100%, 420px);
+  aspect-ratio: 3 / 2;
+}
+
+/* Rangées défilantes: indice de balayage visible (fondu + flèche) quand il reste du contenu */
+.scroller.can-right,
+.hpan-viewport.can-right:not(.is-pinned) {
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 56px), transparent);
+  mask-image: linear-gradient(90deg, #000 calc(100% - 56px), transparent);
+}
+.scroller.can-left.can-right,
+.hpan-viewport.can-left.can-right:not(.is-pinned) {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 56px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 56px), transparent);
+}
+.scroller.can-left:not(.can-right),
+.hpan-viewport.can-left:not(.can-right):not(.is-pinned) {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 40px);
+  mask-image: linear-gradient(90deg, transparent, #000 40px);
+}
+.scroller > *,
+.hpan-track > * {
+  scroll-snap-align: start;
+}
+.scroller,
+.hpan-viewport {
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+}
+.swipe-hint {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  margin: -4px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.swipe-hint.is-on {
+  display: inline-flex;
+}
+.swipe-hint i {
+  font-style: normal;
+  display: inline-block;
+}
+.js-motion .swipe-hint.is-on i {
+  animation: swipe-nudge 1.6s var(--ease-in-out) infinite;
+}
+@keyframes swipe-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .swipe-hint i {
+    animation: none !important;
+  }
+}
+
+/* Mouvement: si le JS n'a pas démarré à temps, tout reste visible */
+.js-motion.motion-failed .hero-caption,
+.js-motion.motion-failed .hero-glow {
+  opacity: 1 !important;
+}
+.js-motion.motion-failed .hero-door {
+  display: none;
+}
+.js-motion.motion-failed .hero-day {
+  clip-path: none !important;
+}
+
+/* Disque de flan sur écran tactile: le défilement vertical reste possible, le disque tient dans l'écran */
+@media (pointer: coarse) {
+  .disc {
+    touch-action: pan-y;
+    width: min(100%, 640px, 64svh);
   }
 }

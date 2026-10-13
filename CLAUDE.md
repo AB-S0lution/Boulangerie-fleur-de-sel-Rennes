@@ -7,6 +7,6 @@
 - **Particularité**: Vite retire `blocking="render"` des scripts; le plugin `blockingRender` de `vite.config.ts` le remet (nécessaire aux View Transitions).
 - **Typographie**: `typo()` (src/core/dom.ts) met les espaces insécables avant `? ! ; :` et dans « »; passer tout HTML injecté par `setHTML`/`typo`.
 - **Mouvement**: la classe `js-motion` (script inline) active les états initiaux; `prefers-reduced-motion` donne l'état statique. Pas de `transition: all`, pas de tiret cadratin.
-- **Art**: tout est SVG original (`src/core/art.ts`); aucune photo ni logo de la boutique.
+- **Art**: SVG original (`src/core/art.ts`) + photos d'illustration Unsplash (`src/data/photos.ts`, `public/photos`, composants `photoImg`/`photoFigure`/`photoBand`); aucune photo ni logo de la boutique.
 - **Données**: `src/data/*.ts`, toujours marquées exemple vs réel; le JSON-LD n'utilise que des données vérifiées.
 - **Git**: ne jamais committer ni pousser sans demande.

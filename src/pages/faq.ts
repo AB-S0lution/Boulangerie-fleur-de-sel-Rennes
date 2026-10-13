@@ -2,7 +2,7 @@ import { boot } from '../core/boot'
 import { $, $$, fold, html, reducedMotion } from '../core/dom'
 import { icon } from '../core/icons'
 import { productArt } from '../core/art'
-import { pageHero } from '../core/components'
+import { pageHero, photoBand } from '../core/components'
 import { FAQ, FAQ_TOPICS, type FaqTopic } from '../data'
 
 let topic: FaqTopic | 'tout' = 'tout'
@@ -12,6 +12,7 @@ function main(): string {
   const count = (t: FaqTopic | 'tout') => (t === 'tout' ? FAQ.length : FAQ.filter((f) => f.topic === t).length)
   return html`
     ${pageHero({ eyebrow: 'Questions fréquentes', title: 'On vous répond.', lead: 'Les réponses marquées « à confirmer » attendent une validation de la boutique. En cas de doute, appelez-nous.' })}
+    ${photoBand(['cafe-viennoiseries', 'pain-sac-papier', 'croissant-liege'])}
     <section class="section section--tight faq">
       <div class="wrap faq-wrap">
         <div class="filters">

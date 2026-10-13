@@ -2,7 +2,7 @@ import { boot } from '../core/boot'
 import { $, $$, clamp, eur, href, html, setHTML } from '../core/dom'
 import { icon } from '../core/icons'
 import { flanBaseSection, flanDisc, flanSlice, flanWedge } from '../core/art'
-import { arrowLink, pageHero, sectionHead } from '../core/components'
+import { arrowLink, pageHero, photoBand, sectionHead } from '../core/components'
 import { gsap, motionOn } from '../core/motion'
 import {
   BUSINESS,
@@ -441,7 +441,7 @@ boot({
   nav: 'flans',
   main: () => html`
     ${pageHero({ eyebrow: 'Le bar à flans', title: 'Faites tourner le disque.', lead: `${voice('framboise')} Sept parfums par jour, ${eur(FLAN_PRICE)} la part, sur une base de pâte à croissant.` })}
-    ${stage()}${howItsMade()}${whole()}${seasons()}${editions()}${allFlavours()}${nextFlan()}`,
+    ${stage()}${howItsMade()}${photoBand(['macarons', 'tarte-fruits-rouges', 'patisserie-soucoupe'])}${whole()}${seasons()}${editions()}${allFlavours()}${nextFlan()}`,
   init() {
     initDisc()
     initSeasonToggleStatic()

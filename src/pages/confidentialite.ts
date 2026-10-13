@@ -1,11 +1,12 @@
 import { boot } from '../core/boot'
 import { html } from '../core/dom'
-import { pageHero } from '../core/components'
+import { pageHero, photoBand } from '../core/components'
 import { BUSINESS } from '../data'
 
 boot({
   main: () => html`
     ${pageHero({ eyebrow: 'Confidentialité', title: 'Aucun cookie, aucun traceur.' })}
+    ${photoBand(['tranches-pain'], 'photo-slim--single')}
     <section class="section section--tight legal">
       <div class="wrap prose">
         <h2>Ce que ce site ne fait pas</h2>
