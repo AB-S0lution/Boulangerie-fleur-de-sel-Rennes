@@ -685,6 +685,8 @@ button {
   text-decoration: none;
   line-height: 1;
   white-space: nowrap;
+  /* zone de tap de 44 px sans changer le rendu */
+  padding-block: 11px;
 }
 .wordmark .dot {
   display: inline-block;
