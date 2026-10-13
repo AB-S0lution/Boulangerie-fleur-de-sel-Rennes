@@ -1,0 +1,23 @@
+/* Fleur de sel, démo. Concept « Tourage »: l'or se plie dans le sel.
+   Tailwind v4 fournit le reset et les utilitaires; tout le reste vit dans @layer components
+   (donc les utilitaires Tailwind gardent toujours le dernier mot). */
+@import "tailwindcss";
+@import "./styles/components.css" layer(components);
+@import "./styles/pages.css" layer(components);
+
+@theme {
+  --font-display: "Schibsted Grotesk Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Hanken Grotesk Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --color-salt: #f5f6f3;
+  --color-pan: #d9dcd8;
+  --color-ink: #13161c;
+  --color-slate: #4a515b;
+  --color-night: #0f131b;
+  --color-night-2: #1a2030;
+  --color-gold: #d2ae5c;
+  --color-gold-deep: #7a5a12;
+  --color-glow: #f0d79a;
+  --color-schist: #6b3a48;
+}

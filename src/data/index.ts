@@ -1,0 +1,25 @@
+// DONNÉES D'EXEMPLE: à remplacer par les données réelles de la boutique.
+// Point d'entrée unique de la couche de données typée. Chaque fichier porte en en-tête la liste de ce qui est
+// réel (vérifié, PLAN.md) et de ce qui est d'exemple. Aucune donnée n'est écrite en dur dans les pages.
+
+export * from './business'
+export * from './hours'
+export * from './products'
+export * from './flans'
+export * from './seasons'
+export * from './limitedEditions'
+export * from './news'
+export * from './testimonials'
+export * from './faq'
+export * from './gallery'
+export * from './team'
+export * from './stats'
+export * from './voice'
+export * from './press'
+export * from './suppliers'
+export * from './process'
+export * from './quartier'
+export * from './glossary'
+export * from './timeline'
+export * from './navigation'
+export * from './photos'
