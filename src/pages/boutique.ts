@@ -68,7 +68,7 @@ function main(): string {
           </div>
         </div>
         <div class="result-bar">
-          <p class="result-count mono" role="status" aria-live="polite" data-count></p>
+          <p class="result-count mono" role="status" aria-live="polite" data-result-count></p>
           <button class="link reset" type="button" data-reset hidden>Réinitialiser</button>
         </div>
         <p class="cat-intro lead" data-intro></p>
@@ -90,7 +90,7 @@ function init() {
   const cards = $$<HTMLElement>('[data-grid] .tag-card')
   const grid = $('[data-grid]')!
   const empty = $('[data-empty]')!
-  const countEl = $('[data-count]')!
+  const countEl = $('[data-result-count]')!
   const intro = $('[data-intro]')!
   const resetBtns = $$('[data-reset]')
   const input = $<HTMLInputElement>('#q')!

@@ -52,7 +52,7 @@ function main(): string {
           <p class="eyebrow" data-reveal="fade">Pour venir</p>
           <h2 data-split>Un arrêt de bus à 64 mètres.</h2>
           <ul class="transport" data-reveal>
-            ${TRANSPORT.map((t) => html`<li>${icon(t.mode === 'metro' ? 'train' : 'bus')}<span><strong>${t.label}</strong>, ${t.lines} <span class="muted mono">à environ ${t.approxMeters} m</span></span></li>`)}
+            ${TRANSPORT.map((t) => html`<li>${icon(t.mode === 'metro' ? 'train' : 'bus')}<span><strong>${t.label}</strong>, ${t.lines} <span class="muted mono">à environ&nbsp;${t.approxMeters}&nbsp;m</span></span></li>`)}
           </ul>
         </div>
         <div class="come-actions" data-reveal>

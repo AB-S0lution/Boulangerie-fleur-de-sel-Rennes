@@ -293,7 +293,7 @@ function horaires(): string {
             <a class="btn btn--ghost" href="${BUSINESS.links.maps}" target="_blank" rel="noopener noreferrer">Itinéraire<span class="btn-ico">${icon('map-pin')}</span></a>
           </div>
           <ul class="transport" data-reveal>
-            ${TRANSPORT.map((t) => html`<li>${icon(t.mode === 'metro' ? 'train' : 'bus')}<span><strong>${t.label}</strong>, ${t.lines} <span class="muted mono">à environ ${t.approxMeters} m</span></span></li>`)}
+            ${TRANSPORT.map((t) => html`<li>${icon(t.mode === 'metro' ? 'train' : 'bus')}<span><strong>${t.label}</strong>, ${t.lines} <span class="muted mono">à environ&nbsp;${t.approxMeters}&nbsp;m</span></span></li>`)}
           </ul>
         </div>
         <div class="board-card" data-reveal>

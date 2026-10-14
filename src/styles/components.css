@@ -293,6 +293,11 @@ button {
   transform: none;
   clip-path: inset(0 0 100% 0);
 }
+.js-motion [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  clip-path: none;
+}
 .js-motion [data-split] {
   visibility: hidden;
 }

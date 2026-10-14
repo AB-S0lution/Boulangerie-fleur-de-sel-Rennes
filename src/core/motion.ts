@@ -44,6 +44,36 @@ export function initSmoothScroll(): void {
 export const stopScroll = (): void => lenis?.stop()
 export const startScroll = (): void => lenis?.start()
 
+/** Révèle un élément data-reveal une seule fois. La classe `is-in` fixe l'état final en CSS:
+ * sans elle, `clearProps` ferait revenir l'état initial de la feuille de style (photo recoupée, texte décalé). */
+function revealEl(el: HTMLElement, delay = 0): void {
+  if (el.dataset.revealed) return
+  el.dataset.revealed = '1'
+  const done = () => el.classList.add('is-in')
+  const mode = el.dataset.reveal
+  if (mode === 'clip') {
+    gsap.fromTo(el, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: 1.1, ease: EASE_OUT, delay, onComplete: done, clearProps: 'clipPath' })
+  } else if (mode === 'fade') {
+    gsap.to(el, { opacity: 1, duration: 0.9, ease: 'power2.out', delay, onComplete: done })
+  } else {
+    gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: EASE_OUT, delay, onComplete: done, clearProps: 'transform' })
+  }
+}
+
+/** Filet de sécurité: tout ce qui est à l'écran (ou au-dessus) et pas encore révélé l'est maintenant.
+ * Couvre le contenu filtré ou inséré après coup et les derniers éléments en bas de page. */
+export function revealVisible(): void {
+  if (!motionOn()) return
+  const vh = window.innerHeight
+  const atEnd = window.scrollY + vh >= document.documentElement.scrollHeight - 4
+  let i = 0
+  $$('[data-reveal]:not([data-revealed])').forEach((el) => {
+    const r = el.getBoundingClientRect()
+    if (!r.width && !r.height) return
+    if (r.top < vh * 0.98 || atEnd) revealEl(el, Math.min(i++, 6) * 0.06)
+  })
+}
+
 /** Révélations génériques au défilement: data-reveal="up|fade|clip". */
 export function initReveals(): void {
   if (!motionOn()) return
@@ -53,19 +83,15 @@ export function initReveals(): void {
     once: true,
     batchMax: 8,
     interval: 0.08,
-    onEnter: (batch) => {
-      batch.forEach((el, i) => {
-        const mode = (el as HTMLElement).dataset.reveal
-        if (mode === 'clip') {
-          gsap.fromTo(el, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: 1.1, ease: EASE_OUT, delay: i * 0.08, clearProps: 'clipPath' })
-        } else if (mode === 'fade') {
-          gsap.to(el, { opacity: 1, duration: 0.9, ease: 'power2.out', delay: i * 0.06 })
-        } else {
-          gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: EASE_OUT, delay: i * 0.08, clearProps: 'transform' })
-        }
-      })
-    },
+    onEnter: (batch) => batch.forEach((el, i) => revealEl(el as HTMLElement, i * 0.08)),
   })
+  let t = 0
+  ScrollTrigger.addEventListener('scrollEnd', () => {
+    window.clearTimeout(t)
+    t = window.setTimeout(revealVisible, 150)
+  })
+  ScrollTrigger.addEventListener('refresh', () => requestAnimationFrame(revealVisible))
+  window.setTimeout(revealVisible, 1200)
 }
 
 /** Titres découpés en lignes masquées (SplitText) qui montent au défilement. */

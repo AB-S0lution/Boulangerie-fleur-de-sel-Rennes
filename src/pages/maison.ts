@@ -92,7 +92,7 @@ function shop(): string {
   const s = stat('equipe')
   return html`
     <section class="section section--line the-shop">
-      <div class="wrap shop-grid">
+      <div class="wrap shop-story-grid">
         <div class="shop-art" data-reveal="clip">${galleryArt(facade, FLANS)}</div>
         <div>
           ${sectionHead('La boutique', 'Blanche et or, pour faire place au produit.', 'Trente-six mètres carrés, un comptoir, une vitrine. Le décor s’efface pour laisser parler les feuilletages.')}

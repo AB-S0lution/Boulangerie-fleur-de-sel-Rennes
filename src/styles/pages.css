@@ -1427,7 +1427,7 @@ html:not(.js-motion) .flan-stage-grid {
 .made-grid,
 .whole-grid,
 .next-grid,
-.shop-grid,
+.shop-story-grid,
 .cert-grid,
 .come-grid {
   display: grid;
@@ -1438,7 +1438,7 @@ html:not(.js-motion) .flan-stage-grid {
 @media (min-width: 900px) {
   .made-grid,
   .whole-grid,
-  .shop-grid,
+  .shop-story-grid,
   .cert-grid,
   .come-grid {
     grid-template-columns: 1fr 1fr;

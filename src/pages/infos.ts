@@ -39,7 +39,7 @@ function main(): string {
             <p class="fine muted">Schéma du quartier, pas une carte à l’échelle. <a class="link" href="${BUSINESS.links.osm}" target="_blank" rel="noopener noreferrer">Voir sur OpenStreetMap</a>.</p>
           </div>
           <ul class="transport">
-            ${TRANSPORT.map((t) => html`<li>${icon(t.mode === 'metro' ? 'train' : 'bus')}<span><strong>${t.label}</strong>, ${t.lines} <span class="muted mono">à environ ${t.approxMeters} m</span></span></li>`)}
+            ${TRANSPORT.map((t) => html`<li>${icon(t.mode === 'metro' ? 'train' : 'bus')}<span><strong>${t.label}</strong>, ${t.lines} <span class="muted mono">à environ&nbsp;${t.approxMeters}&nbsp;m</span></span></li>`)}
           </ul>
           <p>${arrowLink('Le quartier Saint-Martin', href('le-quartier/'), 'btn--ghost')}</p>
         </div>
